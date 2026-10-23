@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v7.0.1
+    - uses: actions/cache@v6.1.0
     - uses: cachix/install-nix-action@v31.11.1
     - uses: cachix/cachix-action@v17
       with:
@@ -20,7 +21,7 @@ jobs:
     - name: Install devenv.sh
       run: nix profile add nixpkgs#devenv
 
-    - name: Build the devenv shell and run any pre-commit hooks
+    - name: Build the devenv shell and run tests
       run: devenv test
 
     - uses: pre-commit/action@v3.0.1
