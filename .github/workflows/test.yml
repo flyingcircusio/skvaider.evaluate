@@ -24,4 +24,7 @@ jobs:
     - name: Build the devenv shell and run tests
       run: devenv test
 
+    - name: Build the devenv shell and run tests
+      run: devenv shell "uv sync --locked --all-extras --all-groups"
+
     - uses: pre-commit/action@v3.0.1
