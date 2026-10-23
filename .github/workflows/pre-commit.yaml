@@ -10,5 +10,10 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
     - uses: actions/checkout@v7
-    - uses: actions/setup-python@7
+    - uses: astral-sh/setup-uv@v10
+      with:
+        enable-cache: true
+    - name: Install locked dependencies
+      run: uv sync --locked --all-extras --all-groups
+    # - uses: actions/setup-python@7
     - uses: pre-commit/action@v3.0.1
