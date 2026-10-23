@@ -9,6 +9,9 @@
 {
   env.GREET = "skvaider.evaluate";
 
+  # github codespaces integration
+  devcontainer.enable = true;
+
   # https://devenv.sh/packages/
   packages = [ pkgs.git ];
 
