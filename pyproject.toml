@@ -1,0 +1,78 @@
+[project]
+name = "skvaider.evaluate"
+version = "0.1dev0"
+
+description = "Tools to for developers to continuously evaluate AI usage for applications."
+license = "MIT"
+authors = [
+    { name = "Flying Circus IO GmbH <mail@flyingcircus.io>", email = "mail@flyingcircus.io" },
+]
+
+requires-python = "==3.14.*"
+dependencies = [
+    # keep-sorted start
+    "alembic",
+    "pydantic>=2.13.5",
+    "pyramid>=2.1",
+    "pyramid_chameleon",
+    "pyramid_debugtoolbar",
+    "pyramid_retry",
+    "pyramid_tm",
+    "sqlalchemy",
+    "transaction",
+    "waitress",
+    "zope.sqlalchemy",
+    # keep-sorted end
+]
+
+[dependency-groups]
+dev = [
+    # keep-sorted start
+    "WebTest",
+    "pytest",
+    "pytest-asyncio",
+    "pytest-cache",
+    "pytest-cov",
+    "pytest-localserver",
+    "pytest-rerunfailures",
+    "pytest-timeout",
+    "pytest-xdist",
+    "ruff==0.16.8",         # keep in sync with pre-commit
+    # keep-sorted end
+]
+
+[build-system]
+requires = ["uv_build>=0.9.22,<0.10"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "skvaider.evaluate"
+module-root = "src"
+
+[tool.uv]
+exclude-newer = "7 days"
+
+[project.scripts]
+# keep-sorted start
+skvaider-evaluate = "skvaider.evaluate.cli:main"
+# keep-sorted end
+
+[tool.ruff]
+line-length = 80
+
+[tool.scriv]
+format = "rst"
+fragment_directory = "CHANGES.d"
+output_file = "CHANGES.txt"
+version = "unreleased"
+entry_title_template = ""
+rst_header_chars = "-~"
+insert_marker = "- Nothing changed yet."
+categories = ""
+
+[tool.basedpyright]
+typeCheckingMode = "standard"
+venvPath = "."
+pythonVersion = "3.14"
+venv = ".devenv/state/venv"
+include = ["src"]
