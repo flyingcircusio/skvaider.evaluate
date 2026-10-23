@@ -17,6 +17,14 @@ jobs:
     - uses: cachix/cachix-action@v17
       with:
         name: devenv
+
+    - name: Restore devenv evaluation cache
+      id: devenv-cache
+      uses: onsails/devenv-cache-action@v3.0.3
+      with:
+        key-suffix: ${{ github.run_id }}
+        cache-nix-eval: true
+
     - name: Install devenv.sh
       run: nix profile add nixpkgs#devenv
 
