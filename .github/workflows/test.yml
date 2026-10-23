@@ -22,3 +22,5 @@ jobs:
 
     - name: Build the devenv shell and run any pre-commit hooks
       run: devenv test
+
+    - uses: pre-commit/action@v3.0.1
