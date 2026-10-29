@@ -72,7 +72,7 @@ Folge diesen Schritten, um an neuen Features zu arbeiten:
 ### Schritt 1: Codespace öffnen
 Starte deine Entwicklungsumgebung.
 
-### Schritt 2: Zum Development-Branch wechseln
+### Schritt 2: Zum Development-Branch wechseln (main oder deiner)
 ```bash
 git checkout develop
 ```
