@@ -11,6 +11,31 @@
 
   # github codespaces integration
   devcontainer.enable = true;
+  # `devenv test` (the default) works in .devenv/test-state, so it never fills
+  # .devenv/state/venv. Enter the regular shell instead: that runs uv sync.
+  devcontainer.settings.updateContentCommand = "devenv shell -- true";
+  devcontainer.settings.customizations.vscode = {
+    extensions = [
+      "mkhl.direnv"
+      "ms-python.python"
+      # Pylance comes bundled with ms-python.python; basedpyright replaces it.
+      "-ms-python.vscode-pylance"
+      "charliermarsh.ruff"
+      "detachhead.basedpyright"
+    ];
+    settings = {
+      # The venv that uv sync populates on shell entry (see below).
+      "python.defaultInterpreterPath" = "\${workspaceFolder}/.devenv/state/venv/bin/python";
+      # basedpyright provides the language server; keep Pylance out of the way.
+      "python.languageServer" = "None";
+      # Use the tool versions pinned in uv.lock instead of the bundled ones.
+      "ruff.importStrategy" = "fromEnvironment";
+      "basedpyright.importStrategy" = "fromEnvironment";
+      "[python]" = {
+        "editor.defaultFormatter" = "charliermarsh.ruff";
+      };
+    };
+  };
 
   # https://devenv.sh/packages/
   packages = [ pkgs.git ];
@@ -18,6 +43,8 @@
   # https://devenv.sh/languages/
   languages.python.enable = true;
   languages.python.uv.enable = true;
+  languages.python.uv.sync.enable = true;
+  languages.python.uv.sync.allGroups = true;
 
   # https://devenv.sh/processes/
   processes.dev.exec = "${lib.getExe pkgs.watchexec} --restart -w src -w uv.lock -w pyproject.toml -- uv run skvaider-evaluate web";
