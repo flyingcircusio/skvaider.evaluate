@@ -1,0 +1,19 @@
+[models]
+# This defines that I need 1 LLM model and 1 embedding
+# model.
+model1 = "llm"
+model2 = "embedding"
+
+
+[[eval]]
+# model1 and model2 are automatically exported as
+# environment variables:
+#    SKVAIDER_EVALUATE_MODEL1_NAME = "<modelname>"
+#    SKVAIDER_EVALUATE_MODEL1_ENDPOINT = "<endpoint>"
+#    SKVAIDER_EVALUATE_MODEL1_SECRET = "<secret>"
+#    SKVAIDER_EVALUATE_MODEL2_NAME = "<modelname>"
+#    SKVAIDER_EVALUATE_MODEL2_ENDPOINT = "<endpoint>"
+#    SKVAIDER_EVALUATE_MODEL2_SECRET = "<secret>"
+#    SKVAIDER_EVALUATE_RESULTS = "<some temp file path.toml>"
+
+command = "run-evals"

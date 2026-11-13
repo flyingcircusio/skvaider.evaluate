@@ -3,3 +3,20 @@ directory = "var/"
 [server]
 host = "127.0.0.1"
 port = 8000
+
+[[models]]
+name = "gpt-oss:120b"
+endpoint = "..."
+secret = "..."
+type = "llm"
+
+
+[[models]]
+name = "embeddinggemma:300m"
+endpoint = "..."
+secret = "..."
+type = "embedding"
+
+
+[[repos]]
+path = "./examples/1"
