@@ -31,6 +31,12 @@
   #   "devenv:enterShell".after = [ "myproj:setup" ];
   # };
 
+  # Install the prek git hook using the version pinned in uv.lock. Forced so
+  # hooks left over from pre-commit get replaced instead of chained.
+  enterShell = ''
+    uv run --frozen --quiet prek install --force --quiet
+  '';
+
   # https://devenv.sh/tests/
   enterTest = ''
     echo "Running tests"
