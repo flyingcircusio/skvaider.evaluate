@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# calls something application specific,
+# sees variables like:
+# SKVAIDER_EVALUATE_MODEL1_NAME
+# SKVAIDER_EVALUATE_MODEL1_ENDPOINT
+# SKVAIDER_EVALUATE_MODEL1_SECRET
+# ...
+
+#... do something ...
+
+# And report results
+# SKVAIDER_EVALUATE_RESULTS="/tmp/job21.toml"
+
+cat >__EOF__
+[results]
+tests = 100
+success = 98
+error = 1
+failure = 1
+__EOF__
