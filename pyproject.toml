@@ -29,6 +29,7 @@ dependencies = [
 dev = [
     # keep-sorted start
     "WebTest",
+    "prek==0.5.10",         # keep in sync with prek.toml and CI
     "pytest",
     "pytest-asyncio",
     "pytest-cache",
@@ -37,7 +38,7 @@ dev = [
     "pytest-rerunfailures",
     "pytest-timeout",
     "pytest-xdist",
-    "ruff==0.16.8",         # keep in sync with pre-commit
+    "ruff==0.16.8",         # keep in sync with prek.toml
     # keep-sorted end
 ]
 

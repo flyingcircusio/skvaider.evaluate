@@ -1,0 +1,68 @@
+#:schema https://www.schemastore.org/prek.json
+# Configuration for prek (https://prek.j178.dev).
+
+# Keep in sync with prek in pyproject.toml and .github/workflows/test.yml.
+minimum_prek_version = "0.5.10"
+
+exclude = '''
+(?x)^(
+  src/skvaider/survey/static/(js|css)/bootstrap.*|
+  src/skvaider/survey/static/(js|css)/htmx.*|
+  src/skvaider/survey/static/(js|css)/_hyperscript.*|
+  .*\.patch|
+  uv.lock
+)
+'''
+
+# Rule selection lives in pyproject.toml so editors and prek agree.
+[[repos]]
+repo = "https://github.com/astral-sh/ruff-pre-commit"
+rev = "v0.16.8" # keep in sync with pyproject.toml
+hooks = [
+  { id = "ruff-check", args = ["--fix"] },
+  { id = "ruff-format" },
+]
+
+[[repos]]
+repo = "https://github.com/google/keep-sorted"
+rev = "v0.10.0"
+hooks = [
+  { id = "keep-sorted" },
+]
+
+[[repos]]
+repo = "https://github.com/astral-sh/uv-pre-commit"
+rev = "0.12.21" # uv version
+hooks = [
+  { id = "uv-lock", args = ["--check"] },
+]
+
+[[repos]]
+repo = "https://github.com/DetachHead/basedpyright-pre-commit-mirror"
+rev = "1.40.1"
+hooks = [
+  { id = "basedpyright", pass_filenames = false },
+  { id = "basedpyright", alias = "basedpyright-baseline", name = "basedpyright (write baseline)", args = ["--writebaseline"], pass_filenames = false, stages = ["manual"] },
+]
+
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "prettier", name = "prettier", language = "node", entry = "prettier --write --ignore-unknown", additional_dependencies = ["prettier@3.3.3"], files = "^fcio-ui/", exclude = '^fcio-ui/openapi\.json$', types = ["text"], require_serial = false },
+]
+
+# Built-in low level hooks last because basedpyright and others might create
+# changes that need to be checked/fixed, too. These are prek's built-in
+# (Rust) implementations, so no hook environment needs to be installed.
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "detect-private-key" },
+  { id = "check-added-large-files" },
+  { id = "trailing-whitespace" },
+  { id = "end-of-file-fixer" },
+  { id = "check-yaml" },
+  { id = "check-json" },
+  { id = "check-xml" },
+  { id = "check-toml" },
+]
